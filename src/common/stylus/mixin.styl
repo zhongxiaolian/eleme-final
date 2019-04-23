@@ -1,2 +1,33 @@
 px2rem(n)
     return unit(n/(750/10),'rem')   // 这里采用的是750的设计稿，分成10等份。
+
+border-1px($color)
+    position relative
+    &::after
+        content ''                  // 必须要写content，否则伪类不会出现
+        display block
+        position absolute
+        left 0
+        bottom 0
+        width 100%
+        height 0
+        border-bottom 1px solid $color
+        @media screen and (-webkit-min-device-pixel-ratio:1.5),(webkit-min-device-pixel-ratio:1.5)
+            -webkit-transform scaleY(0.7)
+            transform scaleY(0.7)
+        @media screen and (-webkit-min-device-pixel-ratio:2),(webkit-min-device-pixel-ratio:2)
+            -webkit-transform scaleY(0.5)
+            transform scaleY(0.5)        
+        @media screen and (-webkit-min-device-pixel-ratio:3),(webkit-min-device-pixel-ratio:3)
+            -webkit-transform scaleY(0.3)
+            transform scaleY(0.3)                
+border-none()
+    &::after
+        display none 
+
+bg-image($url)
+    background-image url($url+'@2x.png')
+    background-size contain
+    background-repeat no-repeat        
+    @media screen and (-webkit-min-device-pixel-ratio:3),(webkit-min-device-pixel-ratio:3)
+        background-image url($url+'@3x.png')
