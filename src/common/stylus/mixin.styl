@@ -20,10 +20,17 @@ border-1px($color)
             transform scaleY(0.5)        
         @media screen and (-webkit-min-device-pixel-ratio:3),(webkit-min-device-pixel-ratio:3)
             -webkit-transform scaleY(0.3)
-            transform scaleY(0.3)                
-border-none()
-    &::after
-        display none 
+            transform scaleY(0.3)     
+
+// 采用缩放的方式实现的1px边框在overflow: scroll的情况下部分显示有问题
+border-1px-gradient($color)
+    background-image -webkit-linear-gradient(top,rgba(0,0,0,0),$color); /* Safari 5.1 - 6 */
+    background-image -o-linear-gradient(top,rgba(0,0,0,0),$color); /* Opera 11.1 - 12*/
+    background-image -moz-linear-gradient(top,rgba(0,0,0,0),$color); /* Firefox 3.6 - 15*/
+    background-image linear-gradient(to bottom, rgba(0,0,0,0), $color); /* 标准的语法 */    
+    background-repeat no-repeat
+    background-position left bottom 
+    background-size 100% 1px
 
 bg-image($url)
     background-image url($url+'@2x.png')

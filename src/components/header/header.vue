@@ -110,8 +110,8 @@
                 border-radius 4px
                 overflow hidden
                 img 
-                    width 100%
-                    height 100%
+                    width px2rem(128)
+                    height px2rem(128)
             .content-right
                 flex 1
                 padding px2rem(4) 0
