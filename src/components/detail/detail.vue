@@ -1,6 +1,7 @@
 <template>
     <div class="detail">
         this is detail
+        正在开发detail组件
     </div>
 </template>
 

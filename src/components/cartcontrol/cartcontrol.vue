@@ -1,12 +1,12 @@
 <template>
     <div class="cartcontrol flex-v-center">
-        <div class="decrease" v-show="getFoodCountById(food.id)" @click="removeFromCart(food.id)">
+        <div class="decrease" v-show="getFoodCountById(food.id)" @click.stop.prevent="removeFromCart(food.id)">
             <span class="icon-remove_circle_outline"></span>
         </div>
         <div class="count-wrapper" v-show="getFoodCountById(food.id)">
             <span class="count">{{getFoodCountById(food.id)}}</span>
         </div>
-        <div class="increase" @click="addToCart(food)">
+        <div class="increase" @click.stop.prevent="addToCart(food)">
             <span class="icon-add_circle"></span>
         </div>
     </div>

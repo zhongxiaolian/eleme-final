@@ -201,7 +201,7 @@
             width 100%
             height 100%
             background rgba(7,17,27,0.8) 
-            z-index 100
+            z-index 200                     // shopcart是100,要高于它
             overflow-y scroll
             -webkit-overflow-scrolling touch
             &.fade-slide-enter-active, &.fade-slide-leave-active
