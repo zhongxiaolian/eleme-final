@@ -6,21 +6,36 @@
             <span class="tab-item" :class="{'current': $route.path === '/ratings'}" @click="toRoute('/ratings')">评价</span>
             <span class="tab-item" :class="{'current': $route.path === '/seller'}" @click="toRoute('/seller')">商家</span>
         </div>
-        <router-view></router-view>
+        <transition name="view-fade">
+            <!-- <keep-alive> -->
+                <router-view></router-view>
+            <!-- </keep-alive> -->
+        </transition>
+        <transition name="shopcart-slidedown">
+            <shopcart 
+                :minPrice="seller.minPrice" 
+                :deliveryPrice="seller.deliveryPrice"
+                v-show="cartShow">
+            </shopcart>
+        </transition>
     </div>
 </template>
 
 <script type='text/ecmascript-6'>
     import header from 'components/header/header.vue';
+    import shopcart from 'components/shopcart/shopcart.vue';
+import { setTimeout } from 'timers';
 
     export default {
         data () {
             return {
-                seller: {}
+                seller: {},
+                cartShow: true
             }
         },
         components: {
-            'v-header': header
+            'v-header': header,
+            shopcart
         },
         methods: {
             toRoute(path){
@@ -34,6 +49,20 @@
                     this.seller = data.data;
                 }
             });
+        },
+        updated(){                          // updated发生在patch方法之后
+            setTimeout(() => {              // 不加延时动画会卡顿
+                console.log('app updated')            // 打印两次是因为cartShow的修改导致视图又发生更新
+                if(this.$route.path.indexOf('goods')>0 || this.$route.path.indexOf('detail')>0){
+                    this.cartShow = true
+                }else{
+                    this.cartShow = false
+                }     
+
+            }, 300);
+        },
+        mounted(){                          // mounted在组件的生命周期中只执行一次
+
         }
     }
 </script>
@@ -53,4 +82,8 @@
                 color rgb(77,85,93)
                 &.current
                     color rgb(240,20,20)
+        .view-fade-enter-active, .view-fade-leave-active
+            transition opacity .2s
+        .view-fade-enter, .view-fade-leave-to
+            opacity 0
 </style>

@@ -4,7 +4,7 @@
             <ul>
                 <li class="menu-item-wrapper menu-item-hook" 
                     v-for="(item,index) in goods" 
-                    :key="index" @click="_scrollTo(index)"
+                    :key="index" @click="_scrollTo(index)" 
                     :class="{'current':currentMenu === index}">
                     <div class="menu-item">
                         <span class="icon" :class="classList[item.type]" v-if="item.type && item.type>0"></span>
@@ -18,7 +18,7 @@
                 <li v-for="(item,index) in goods" :key="index" class="food-list-hook">
                     <h2 class="title">{{item.name}}</h2>
                     <ul>
-                        <li v-for="(food,index) in item.foods" :key="index" class="food-item flex">
+                        <li v-for="(food,index) in item.foods" :key="index" class="food-item flex" @click="gotoFood(food.id)">
                             <div class="left">
                                 <img :src="food.image" alt="">
                             </div>
@@ -34,21 +34,36 @@
                                     <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                                 </div>
                             </div>
+                            <div class="cartcontrol-wrapper">
+                                <cartcontrol :food="food"></cartcontrol>
+                            </div>
                         </li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
-</template>
+</template> 
 
 <script type='text/ecmascript-6'>
+    import shopcart from 'components/shopcart/shopcart.vue';
+    import cartcontrol from 'components/cartcontrol/cartcontrol.vue';
     export default {
+        props: {
+            seller: {
+                type: Object
+            }
+        },
         data () {
             return {
                 goods: {},
-                currentMenu: 0
+                currentMenu: 0,
+                shopcartW: 0
             }
+        },
+        components: {
+            shopcart,
+            cartcontrol
         },
         created(){
             this.axios.get('/api/goods').then((response)=>{
@@ -127,6 +142,9 @@
                 }else if(currentMenuPosition < min){
                     menuWrapper.scrollTop = currentMenuPosition
                 }
+            },
+            gotoFood(id){
+                this.$router.push({path: `/detail/${id}`});
             }
         }
     }
@@ -136,12 +154,12 @@
     @import '~common/stylus/mixin.styl'
 
     .goods
-        position absolute
+        position absolute   // footer和header也可以用fixed，这里用绝对定位其实就是让滚动发生在子元素内，不能是body内滚动
         top px2rem(349)
         left 0
         right 0
-        bottom 0
-        padding-bottom px2rem(92) 
+        bottom 46px
+        overflow hidden
         .menu-wrapper
             flex 0 0 px2rem(160)
             width px2rem(160)
@@ -158,7 +176,6 @@
                 &.current
                     font-weight 700
                     color rgb(240,20,20)
-                    // background rgba(0,0,0,0.3)
                 .menu-item
                     display table-cell
                     line-height px2rem(28)
@@ -195,6 +212,7 @@
                 border-left 2px solid #d9dde1
                 background #f3f5f7
             .food-item
+                position relative
                 margin px2rem(36) px2rem(36) 0
                 padding-bottom px2rem(36)
                 border-1px-gradient(rgba(7,17,27,0.1))
@@ -231,4 +249,9 @@
                         .old
                             font-size px2rem(20)
                             color rgb(147,153,159)
+                .cartcontrol-wrapper
+                    position absolute
+                    right px2rem(0)
+                    bottom px2rem(20)
+
 </style>

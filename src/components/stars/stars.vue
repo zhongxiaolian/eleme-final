@@ -8,7 +8,7 @@
 </template>
 
 <script type='text/ecmascript-6'>
-    const LENGTH = 5;
+    const LENGTH = 5;     
     export default {
         props: {
             size: {
