@@ -159,7 +159,6 @@
         left 0
         right 0
         bottom 46px
-        overflow hidden
         .menu-wrapper
             flex 0 0 px2rem(160)
             width px2rem(160)

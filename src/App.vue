@@ -1,5 +1,5 @@
 <template>
-    <div class="app">
+    <div class="myapp">
         <v-header :seller="seller"></v-header>
         <div class="tab">
             <span class="tab-item" :class="{'current': $route.path === '/goods'}" @click="toRoute('/goods')">商品</span>
@@ -7,9 +7,9 @@
             <span class="tab-item" :class="{'current': $route.path === '/seller'}" @click="toRoute('/seller')">商家</span>
         </div>
         <transition name="view-fade">
-            <!-- <keep-alive> -->
-                <router-view></router-view>
-            <!-- </keep-alive> -->
+            <keep-alive>
+                <router-view :seller="seller"></router-view>
+            </keep-alive>
         </transition>
         <transition name="shopcart-slidedown">
             <shopcart 
@@ -70,7 +70,7 @@ import { setTimeout } from 'timers';
 <style lang='stylus' rel='stylesheet/stylus'>
     @import '~common/stylus/mixin.styl';
 
-    .app
+    .myapp
         .tab
             display flex
             line-height px2rem(80)
@@ -83,7 +83,7 @@ import { setTimeout } from 'timers';
                 &.current
                     color rgb(240,20,20)
         .view-fade-enter-active, .view-fade-leave-active
-            transition opacity .2s
+            transition opacity .3s
         .view-fade-enter, .view-fade-leave-to
             opacity 0
 </style>

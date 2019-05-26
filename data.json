@@ -66,7 +66,7 @@
                             "username": "3******c",
                             "rateTime": 1469281964000,
                             "rateType": 0,
-                            "text": "很喜欢的粥",
+                            "text": "很喜欢的粥很喜欢的粥很喜欢的粥很喜欢的粥很喜欢的粥很喜欢的粥很喜欢的粥很喜欢的粥很喜欢的粥",
                             "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
                         },
                         {
@@ -82,7 +82,14 @@
                             "rateType": 1,
                             "text": "",
                             "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
-                        }
+                        },
+                        {
+                            "username": "3******b",
+                            "rateTime": 1469261964000,
+                            "rateType": 1,
+                            "text": "不是很合胃口",
+                            "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
+                        }                       
                     ],
                     "icon": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114",
                     "image": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/750/h/750"

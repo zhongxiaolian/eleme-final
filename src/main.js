@@ -15,4 +15,4 @@ new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app')			// #app是页面上我们要挂载到的位置，在最终会把这个dom替换成我们的App组件
